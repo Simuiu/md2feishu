@@ -1,5 +1,7 @@
 # md2feishu
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 ![md2feishu hero](assets/readme-hero.png)
 
 [![CI](https://github.com/Simuiu/md2feishu/actions/workflows/ci.yml/badge.svg)](https://github.com/Simuiu/md2feishu/actions/workflows/ci.yml)
