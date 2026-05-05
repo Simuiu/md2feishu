@@ -31,6 +31,7 @@
 - 飞书展示始终是最新版、有格式的云文档，不是 `.md` 附件。
 - 任意工作区自动归档到 `codex/<workspace>/`。
 - Codex / Claude 可通过 Skill 自动触发同步。
+- 可以把 Git 中两个版本的差异生成一篇飞书云文档，让用户在在线文档里读懂“这一版改了什么”。
 - 一条命令完成首次创建和后续覆盖更新：
 
 ```bash
@@ -202,6 +203,70 @@ md2feishu inspect <file.md>
 ```
 
 用途：显示这个文件会同步到哪个工作区、哪个飞书文件夹、是否已有绑定，不产生写操作。
+
+新增重点能力：
+
+```bash
+md2feishu diff <file.md>
+```
+
+默认比较当前文件和上一个 Git commit 中的版本，生成一篇面向用户阅读的差异说明 Markdown，并同步为飞书云文档。
+
+支持扩展参数：
+
+```bash
+md2feishu diff <file.md> --from <commit> --to <commit>
+md2feishu diff <file.md> --from HEAD~3 --to HEAD
+md2feishu diff <file.md> --title "对比 - v1 到 v2"
+```
+
+差异文档建议放在：
+
+```text
+codex/
+  <workspace-name>/
+    <latest formatted cloud documents>
+    diffs/
+      对比 - <doc-title> - <from> 到 <to>
+```
+
+差异文档内容不应只是原始 `git diff`，而应该是适合非工程用户阅读的在线文档：
+
+```text
+# 对比 - GitHub 发布方案 - 上一版到当前版
+
+## 总结
+
+- 本轮主要补充了 GitHub 发布策略。
+- 强化了求职案例叙事。
+- 调整了 README 首屏定位。
+
+## 新增内容
+
+...
+
+## 删除内容
+
+...
+
+## 修改内容
+
+旧版：
+...
+
+新版：
+...
+```
+
+实现方式：
+
+- 用 Git 取出两个版本的 Markdown。
+- 用结构化 diff 得到新增、删除、修改片段。
+- 生成一份新的 Markdown 差异说明。
+- 使用 `md2feishu sync` 同步成飞书云文档。
+- 默认不覆盖正式文档，只新增或更新对应的 diff 文档。
+
+这个能力是项目的重要差异化点：AI 生成的文档不是用户亲手写的，用户尤其需要知道每轮修改到底发生了什么。
 
 ### 4.5 错误处理与安全
 
@@ -422,6 +487,7 @@ Built md2feishu, an agent workflow + CLI that turns AI-generated Markdown from C
 - 不做泛用 Markdown 转换器，专注 AI-generated Markdown workflow。
 - 不只提供 CLI，还提供 Skill，让 agent 自动使用。
 - 不只同步文档，还解决工作区归档。
+- 不只展示最新版，还能把 Git 版本差异转换成适合在飞书阅读的对比文档。
 - 不把飞书当文件盘，而是明确生成可阅读的云文档。
 - 用真实个人工作流作为 story，比抽象工具更容易传播。
 
@@ -441,6 +507,7 @@ Built md2feishu, an agent workflow + CLI that turns AI-generated Markdown from C
 - 增加基础测试。
 - 增加 GitHub Actions。
 - 增加 `md2feishu inspect`。
+- 增加 `md2feishu diff`，支持把 Git 版本差异生成飞书对比文档。
 - 增强错误提示。
 - 确认缺权限时提示具体 scope。
 
@@ -448,6 +515,7 @@ Built md2feishu, an agent workflow + CLI that turns AI-generated Markdown from C
 
 - 录制终端同步 GIF。
 - 截图飞书目录结构。
+- 截图飞书中的版本差异对比文档。
 - 写 `docs/launch-story.md`。
 - 写中文介绍文章。
 - 写英文 launch post。
