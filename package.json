@@ -1,0 +1,51 @@
+{
+  "name": "md2feishu",
+  "version": "0.1.0",
+  "description": "Turn AI-generated Markdown into organized, formatted Feishu cloud documents.",
+  "type": "module",
+  "bin": {
+    "md2feishu": "./bin/md2feishu.js"
+  },
+  "scripts": {
+    "check": "node --check ./bin/md2feishu.js",
+    "test": "npm run check && node ./test/smoke.test.js",
+    "doctor": "node ./bin/md2feishu.js doctor"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "examples/",
+    "docs/",
+    "state.example.json",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
+  "keywords": [
+    "feishu",
+    "lark",
+    "markdown",
+    "codex",
+    "claude",
+    "agent",
+    "skill",
+    "docs",
+    "workflow"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-name/md2feishu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-name/md2feishu/issues"
+  },
+  "homepage": "https://github.com/your-name/md2feishu#readme",
+  "dependencies": {
+    "@larksuite/cli": "^1.0.23"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

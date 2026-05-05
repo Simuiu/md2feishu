@@ -1,0 +1,21 @@
+name: Bug report
+description: Report a problem with md2feishu
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: OS, Node version, command, and sanitized output.
