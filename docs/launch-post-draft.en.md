@@ -68,5 +68,5 @@ That will turn Git version differences into Feishu-readable comparison docs, so 
 GitHub:
 
 ```text
-https://github.com/<your-name>/md2feishu
+https://github.com/Simiui/md2feishu
 ```

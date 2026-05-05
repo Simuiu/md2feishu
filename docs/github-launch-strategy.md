@@ -108,7 +108,7 @@ md2feishu sync docs/example.md
 短期可以先支持 GitHub 安装：
 
 ```bash
-npm install -g github:<user>/md2feishu
+npm install -g github:Simiui/md2feishu
 ```
 
 中期再发布到 npm：

@@ -81,7 +81,7 @@ md2feishu diff docs/plan.md
 GitHub：
 
 ```text
-https://github.com/<your-name>/md2feishu
+https://github.com/Simiui/md2feishu
 ```
 
 欢迎试用和提建议。
@@ -98,4 +98,4 @@ https://github.com/<your-name>/md2feishu
 
 适合经常用 AI 写方案、PRD、调研报告、架构文档的人。
 
-GitHub: https://github.com/<your-name>/md2feishu
+GitHub: https://github.com/Simiui/md2feishu

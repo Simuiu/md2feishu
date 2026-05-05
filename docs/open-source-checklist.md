@@ -2,7 +2,7 @@
 
 Before making the repository public:
 
-- Replace `your-name` in `package.json` and `README.md`.
+- Replace GitHub repository placeholders. Done for `Simiui/md2feishu`.
 - Decide whether to publish to npm as `md2feishu`.
 - Confirm no local state, Feishu tokens, or personal document links are committed. Done in local scan; repeat before push.
 - Run `npm test`. Done locally; repeat before push.
