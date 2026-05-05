@@ -1,6 +1,14 @@
 # md2feishu
 
+![md2feishu hero](assets/readme-hero.png)
+
+[![CI](https://github.com/Simuiu/md2feishu/actions/workflows/ci.yml/badge.svg)](https://github.com/Simuiu/md2feishu/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D18-339933.svg)](package.json)
+
 Turn AI-generated Markdown into organized, formatted Feishu cloud docs.
+
+`md2feishu` is for people who use Codex, Claude Code, Cursor, Gemini CLI, or other AI coding agents to write plans, reports, PRDs, architecture notes, and research docs as Markdown, but prefer to read and share the final result in Feishu/Lark.
 
 AI agents are great at writing Markdown. Teams often read and collaborate in Feishu.
 
@@ -12,7 +20,25 @@ codex/
     <formatted Feishu cloud docs>
 ```
 
-It is designed for Codex, Claude Code, Cursor, Gemini CLI, and other agent workflows that produce plans, reports, PRDs, architecture docs, and research notes as Markdown.
+## What It Solves
+
+Without this workflow, every AI revision usually creates manual work:
+
+```text
+agent writes .md -> manually import to Feishu -> revise -> import again -> duplicate docs
+```
+
+With `md2feishu`:
+
+```text
+agent writes .md -> md2feishu sync -> Feishu shows the latest cloud doc
+```
+
+- No duplicate imports after each AI revision.
+- No `.md` attachments pretending to be docs.
+- One simple Feishu layout: `codex/<workspace-name>/<cloud docs>`.
+- Git keeps previous versions and diffs.
+- Feishu stays the clean, readable latest version.
 
 ## Demo
 
@@ -48,18 +74,6 @@ No duplicate imports. No `.md` attachments. The same Feishu cloud document now s
 ## Why
 
 AI agents write Markdown. Teams read Feishu docs.
-
-Without this workflow:
-
-```text
-agent writes .md -> manually import to Feishu -> revise -> import again -> duplicate docs
-```
-
-With `md2feishu`:
-
-```text
-agent writes .md -> md2feishu sync -> Feishu shows the latest cloud doc
-```
 
 - Local `.md` files stay versioned in Git.
 - Feishu always shows the latest formatted cloud document.
