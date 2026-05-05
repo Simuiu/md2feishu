@@ -4,11 +4,11 @@ Before making the repository public:
 
 - Replace `your-name` in `package.json` and `README.md`.
 - Decide whether to publish to npm as `md2feishu`.
-- Confirm no local state, Feishu tokens, or personal document links are committed.
-- Run `npm test`.
+- Confirm no local state, Feishu tokens, or personal document links are committed. Done in local scan; repeat before push.
+- Run `npm test`. Done locally; repeat before push.
 - Record a short demo GIF.
 - Add screenshots for `codex/<workspace>/` layout.
-- Add a launch post draft in Chinese and English.
+- Add a launch post draft in Chinese and English. Done.
 - Create the GitHub repository and push `main`.
 
 Release v0.1.0 when:
