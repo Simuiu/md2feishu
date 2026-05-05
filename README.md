@@ -1,27 +1,83 @@
 # md2feishu
 
-Turn AI-generated Markdown into organized, formatted Feishu cloud documents.
+Turn AI-generated Markdown into organized, formatted Feishu cloud docs.
 
-`md2feishu` keeps Markdown as your local source of truth while publishing the latest readable version to Feishu under:
+AI agents are great at writing Markdown. Teams often read and collaborate in Feishu.
+
+`md2feishu` bridges that gap: keep Markdown as the local source of truth, keep Git as the version history, and publish the latest readable version to Feishu as a real cloud document.
 
 ```text
 codex/
   <workspace-name>/
-    <formatted Feishu cloud documents>
+    <formatted Feishu cloud docs>
 ```
 
-It is designed for Codex, Claude Code, and other agent workflows that produce plans, reports, PRDs, architecture docs, and research notes as Markdown.
+It is designed for Codex, Claude Code, Cursor, Gemini CLI, and other agent workflows that produce plans, reports, PRDs, architecture docs, and research notes as Markdown.
+
+## Demo
+
+```bash
+$ md2feishu sync docs/launch-plan.md
+
+Created Feishu document
+  file: /Users/me/project/docs/launch-plan.md
+  title: Launch Plan
+  doc: https://www.feishu.cn/docx/...
+```
+
+Feishu layout:
+
+```text
+codex/
+  project/
+    Launch Plan
+```
+
+Run it again after editing the same Markdown file:
+
+```bash
+$ md2feishu sync docs/launch-plan.md
+
+Updated existing Feishu document
+  file: /Users/me/project/docs/launch-plan.md
+  title: Launch Plan
+```
+
+No duplicate imports. No `.md` attachments. The same Feishu cloud document now shows the latest version.
 
 ## Why
 
 AI agents write Markdown. Teams read Feishu docs.
 
-Manual import is slow, and repeated imports create duplicate documents. `md2feishu` gives you a stable workflow:
+Without this workflow:
+
+```text
+agent writes .md -> manually import to Feishu -> revise -> import again -> duplicate docs
+```
+
+With `md2feishu`:
+
+```text
+agent writes .md -> md2feishu sync -> Feishu shows the latest cloud doc
+```
 
 - Local `.md` files stay versioned in Git.
 - Feishu always shows the latest formatted cloud document.
-- Documents are grouped by local workspace.
+- Documents are grouped by local workspace under `codex/<workspace-name>/`.
 - Agent skills can trigger sync automatically after meaningful document updates.
+- Future diff docs can turn Git version changes into Feishu-readable comparison documents.
+
+## What Makes It Different
+
+Most Markdown tools focus on conversion.
+
+`md2feishu` focuses on the whole agent workflow:
+
+- **Source of truth**: local Markdown + Git.
+- **Reading surface**: formatted Feishu cloud docs.
+- **Organization**: one `codex` root folder, one folder per local workspace.
+- **Agent-aware**: ships with a Codex skill so agents know when to sync.
+- **Version-aware roadmap**: planned `md2feishu diff` generates readable Feishu docs explaining what changed between Git versions.
 
 ## Quick Start
 
@@ -35,6 +91,25 @@ During setup, follow the Feishu/Lark authorization URL printed by the official `
 
 The npm package name is reserved for a future release. Until then, install from GitHub.
 
+## Feishu Output
+
+`md2feishu` creates formatted Feishu cloud documents through Feishu Docs APIs.
+
+It does **not** upload Markdown files as attachments.
+
+Expected layout:
+
+```text
+codex/
+  trading-agent/
+    Market Research Plan
+    Architecture Review
+  product-specs/
+    v2 Product Proposal
+```
+
+The top-level folder is always `codex` by default. Each local workspace gets one direct child folder.
+
 ## Commands
 
 ```bash
@@ -47,6 +122,20 @@ md2feishu doctor
 md2feishu workspace status
 md2feishu workspace refresh
 md2feishu workspace bind <workspace-path> <folder-token>
+```
+
+### Typical Workflow
+
+```bash
+# 1. Create or revise a Markdown document with your agent.
+$ codex "write a launch strategy in docs/launch-plan.md"
+
+# 2. Publish the latest readable version to Feishu.
+$ md2feishu sync docs/launch-plan.md
+
+# 3. Save the local source version in Git when the revision is meaningful.
+$ git add docs/launch-plan.md
+$ git commit -m "docs: add launch strategy"
 ```
 
 ## Agent Skill
@@ -70,6 +159,13 @@ The skill tells Codex when to run:
 md2feishu sync <path-to-file.md>
 ```
 
+Skill behavior:
+
+- Sync reports, plans, PRDs, specs, research notes, and architecture docs.
+- Skip repo metadata like `README.md` and `CHANGELOG.md` unless explicitly requested.
+- Keep Feishu as the latest readable view.
+- Use Git for previous versions, diffs, and restores.
+
 ## Versioning
 
 Feishu is the latest readable view.
@@ -77,6 +173,14 @@ Feishu is the latest readable view.
 Git is the version history.
 
 Do not create `v1`, `v2`, or `final-final` Markdown copies unless you explicitly want file-based snapshots. Use Git to inspect, compare, or restore earlier versions.
+
+Planned:
+
+```bash
+md2feishu diff docs/launch-plan.md
+```
+
+This will create a Feishu-readable comparison document from Git history, so non-engineering readers can see what changed between revisions without reading raw `git diff`.
 
 ## What It Does Not Do
 
@@ -101,6 +205,10 @@ Do not commit this file. It may contain local paths and Feishu document/folder t
 - `md2feishu diff <file.md>` to publish Git version differences as Feishu-readable comparison docs.
 - Better markdown block handling for tables, images, and diagrams.
 - npm release and packaged skill installation.
+
+## Project Status
+
+Early preview. The workflow is already usable, but the package is being prepared for a public GitHub and npm release.
 
 ## License
 
