@@ -82,7 +82,7 @@ Most Markdown tools focus on conversion.
 ## Quick Start
 
 ```bash
-npm install -g github:Simiui/md2feishu
+npm install -g github:Simuiu/md2feishu
 md2feishu setup
 md2feishu sync docs/plan.md
 ```
